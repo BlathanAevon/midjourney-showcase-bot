@@ -23,11 +23,11 @@ WEBAPP_HOST = "0.0.0.0"
 WEBAPP_PORT = os.getenv("PORT", default=8000)
 
 
-async def on_startup(dispatcher):
+async def on_startup(dispatcher: Dispatcher):
     await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
 
 
-async def on_shutdown(dispatcher):
+async def on_shutdown(dispatcher: Dispatcher):
     bot.delete_webhook()
 
 
@@ -157,14 +157,13 @@ async def prev_image_callback(query: types.CallbackQuery, callback_data: dict):
     )
 
 
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    executor.start_webhook(
-        dispatcher=dp,
-        webhook_path=WEBHOOK_PATH,
-        skip_updates=True,
-        on_startup=on_startup,
-        on_shutdown=on_shutdown,
-        host=WEBAPP_HOST,
-        port=WEBAPP_PORT,
-    )
+logging.basicConfig(level=logging.INFO)
+executor.start_webhook(
+    dispatcher=dp,
+    webhook_path=WEBHOOK_PATH,
+    skip_updates=True,
+    on_startup=on_startup,
+    on_shutdown=on_shutdown,
+    host=WEBAPP_HOST,
+    port=WEBAPP_PORT,
+)
