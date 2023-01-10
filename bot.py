@@ -7,20 +7,28 @@ import random
 import os
 
 
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = "5762183133:AAFBMmKk6xXAtLV2U4yBZy0wU83G5oeiS6o"
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME")
 
 # webhook settings
-WEBHOOK_HOST = f"https://{HEROKU_APP_NAME}.herokuapp.com"
+WEBHOOK_HOST = f"https://midjourney-showcase-bot.herokuapp.com"
 WEBHOOK_PATH = f"/webhook/{TOKEN}"
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
 # webserver settings
 WEBAPP_HOST = "0.0.0.0"
 WEBAPP_PORT = os.getenv("PORT", default=8000)
+
+
+async def on_startup(dispatcher):
+    await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
+
+
+async def on_shutdown(dispatcher):
+    bot.delete_webhook()
 
 
 def get_links_list(page):
@@ -147,14 +155,6 @@ async def prev_image_callback(query: types.CallbackQuery, callback_data: dict):
         chat_id=query.from_user.id,
         reply_markup=get_keyboard(link, callback_data["amount"]),
     )
-
-
-async def on_startup(dp):
-    await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
-
-
-async def on_shutdown(dp):
-    bot.delete_webhook()
 
 
 def main():
