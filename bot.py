@@ -157,7 +157,7 @@ async def prev_image_callback(query: types.CallbackQuery, callback_data: dict):
     )
 
 
-def main():
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     executor.start_webhook(
         dispatcher=dp,
