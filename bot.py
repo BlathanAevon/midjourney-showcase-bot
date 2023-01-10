@@ -7,14 +7,14 @@ import random
 import os
 
 
-TOKEN = "5762183133:AAFBMmKk6xXAtLV2U4yBZy0wU83G5oeiS6o"
+TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME")
 
 # webhook settings
-WEBHOOK_HOST = f"https://midjourney-showcase-bot.herokuapp.com"
+WEBHOOK_HOST = f"https://{HEROKU_APP_NAME}.herokuapp.com"
 WEBHOOK_PATH = f"/webhook/{TOKEN}"
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
