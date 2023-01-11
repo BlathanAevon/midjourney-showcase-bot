@@ -95,7 +95,7 @@ async def send_images(message: types.Message):
 @dp.message_handler(commands=["top"])
 async def send_images(message: types.Message):
     global index
-    global links
+    global top_links
 
     top_links = get_links_list("top")[1:]
     index = 1
