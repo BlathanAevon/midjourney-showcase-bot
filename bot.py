@@ -46,9 +46,8 @@ def get_links_list(page):
     return result
 
 
-links = get_links_list("recent")
-top_links = get_links_list("top")[1:]
-
+links = []
+top_links = []
 
 image_step = CallbackData("vote", "action", "amount")
 
@@ -78,6 +77,10 @@ async def send_images(message: types.Message):
 @dp.message_handler(commands=["recent"])
 async def send_images(message: types.Message):
     global index
+    global links
+
+    links = get_links_list("recent")
+
     index = 1
 
     link = links[index]
@@ -92,6 +95,9 @@ async def send_images(message: types.Message):
 @dp.message_handler(commands=["top"])
 async def send_images(message: types.Message):
     global index
+    global links
+
+    top_links = get_links_list("top")[1:]
     index = 1
 
     link = top_links[index]
