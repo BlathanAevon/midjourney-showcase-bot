@@ -39,7 +39,7 @@ def get_links_list(page):
         text,
     )
 
-    for image_index in range(0, len(urls) + 1, 2):
+    for image_index in range(0, len(urls), 2):
         link = urls[image_index]
         result.append(link)
 
