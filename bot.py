@@ -91,7 +91,14 @@ async def send_images(message: types.Message):
             reply_markup=get_keyboard(link, "recent"),
         )
     except Exception:
-        pass
+        index += 1
+        link = links[index]
+        await bot.send_photo(
+            chat_id=message.chat.id,
+            photo=link,
+            reply_markup=get_keyboard(link, "recent"),
+        )
+        
 
 
 @dp.message_handler(commands=["top"])
@@ -110,7 +117,13 @@ async def send_images(message: types.Message):
             reply_markup=get_keyboard(link, "top"),
         )
     except Exception:
-        pass
+        index += 1
+        link = top_links[index]
+        await bot.send_photo(
+            chat_id=message.chat.id,
+            photo=link,
+            reply_markup=get_keyboard(link, "top"),
+        )
 
 
 @dp.message_handler(commands=["random"])
