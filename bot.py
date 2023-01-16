@@ -130,6 +130,10 @@ async def send_images(message: types.Message):
 async def send_images(message: types.Message):
 
     full_list = []
+    
+    links = get_links_list("recent")
+    top_links = get_links_list("top")
+    
     full_list.extend(links)
     full_list.extend(top_links)
 
