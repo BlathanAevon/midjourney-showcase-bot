@@ -151,7 +151,11 @@ async def send_images(message: types.Message):
 @dp.callback_query_handler(image_step.filter(action="next"))
 async def next_image_callback(query: types.CallbackQuery, callback_data: dict):
     global index
-    index += 1
+    
+    if index > len(top_links) - 1 or index > index > len(links) - 1:
+        pass
+    else:
+        index += 1
 
     if callback_data["amount"] == "top":
         link = top_links[index]
